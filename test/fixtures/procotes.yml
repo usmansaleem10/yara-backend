@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 
+  density: 1.5
+  canadian_price: 1.5
+  us_price: 1.5
+  b_ratio: 1.5
+  cu_ratio: 1.5
+  mn_ratio: 1.5
+  zn_ratio: 1.5
+
+two:
+  name: 
+  density: 1.5
+  canadian_price: 1.5
+  us_price: 1.5
+  b_ratio: 1.5
+  cu_ratio: 1.5
+  mn_ratio: 1.5
+  zn_ratio: 1.5
