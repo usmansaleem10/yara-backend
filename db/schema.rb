@@ -12,7 +12,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_220_411_123_618) do
+ActiveRecord::Schema.define(version: 20_220_423_090_130) do
+  create_table 'crop_procotes', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
+    t.bigint 'crop_id', null: false
+    t.bigint 'procote_id', null: false
+    t.float 'ratio'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index %w[crop_id procote_id], name: 'index_crop_procotes_on_crop_id_and_procote_id', unique: true
+    t.index ['crop_id'], name: 'index_crop_procotes_on_crop_id'
+    t.index ['procote_id'], name: 'index_crop_procotes_on_procote_id'
+  end
+
   create_table 'crops', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
     t.string 'name', null: false
     t.string 'unit', null: false
@@ -33,4 +44,7 @@ ActiveRecord::Schema.define(version: 20_220_411_123_618) do
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['name'], name: 'index_procotes_on_name'
   end
+
+  add_foreign_key 'crop_procotes', 'crops'
+  add_foreign_key 'crop_procotes', 'procotes'
 end

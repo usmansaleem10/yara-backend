@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  crop: one
+  procote: one
+  ratio: 1.5
+
+two:
+  crop: two
+  procote: two
+  ratio: 1.5

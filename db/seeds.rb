@@ -48,3 +48,36 @@ crops.each do |crop|
   record.save!
 end
 puts '====================Crops Added================'
+
+puts '====================Adding Crops Procode Ratio================'
+crop_procotes = [{ crop: 'Alfalfa', ratio: {	BCMZ: 85, BMZ: 99, B: 95, Cu:	45, Mn:	66, Zn:	71	} },
+                 { crop: 'Almond',  ratio: {	BCMZ: 0.22, BMZ:	0.22, B:	0.18, Cu:	0.15, Mn:	0.15, Zn:	0.15	} },
+                 { crop: 'Barley',  ratio: {	BCMZ: 2.3, BMZ:	2.7, B: 	2.4, Cu:	1.6, Mn:	1.2, Zn:	1.6	} },
+                 { crop: 'Canola',  ratio: {	BCMZ: 4.5, BMZ:	4.1, B: 	5.8, Cu:	2, Mn:	1.7, Zn:	3.7	} },
+                 { crop: 'Citrus',  ratio: {	BCMZ: 1.6, BMZ:	1.6, B: 	2.3, Cu:	0.1, Mn:	0.5, Zn:	0.5	} },
+                 { crop: 'Corn', ratio: {	BCMZ: 1.7, BMZ:	1.8, B: 	2, Cu:	0.4, Mn:	0.9, Zn:	1.5	} },
+                 { crop: 'Cotton', ratio: {	BCMZ: 0.33, BMZ:	0.33, B:	0.25, Cu:	0.3, Mn:	0.4, Zn:	0.4	} },
+                 { crop: 'Flax',  ratio: {	BCMZ: 6.3, BMZ:	4, B: 	3.8, Cu:	2.5, Mn:	2.5, Zn:	3.7	} },
+                 { crop: 'Oats',  ratio: {	BCMZ: 1.7, BMZ:	2, B: 	1.3, Cu:	1, Mn:	0.9, Zn:	1	} },
+                 { crop: 'Field Peas', ratio: { BCMZ:	4.7, BMZ:	4, B: 	4.8, Cu:	2.1, Mn:	2.1, Zn:	2.3	} },
+                 { crop: 'Lettuce', ratio: {	BCMZ: 0.23, BMZ:	0.21, B:	0.25, Cu:	0.1, Mn:	0.2, Zn:	0.2	} },
+                 { crop: 'Peanuts', ratio: {	BCMZ: 0.10, BMZ:	0.10, B:	0.09, Cu:	0.05, Mn:	0.10, Zn:	0.10	} },
+                 { crop: 'Potato', ratio: {	BCMZ: 0.9, BMZ:	1,	B: 0.9, Cu: 0.5, Mn:	0.7, Zn:	0.9	} },
+                 { crop: 'Rice', ratio: {	BCMZ: 1.6, BMZ:	1.6, B:	1.7, Cu:	1, Mn:	1, Zn:	1.3	} },
+                 { crop: 'Soybean', ratio: {	BCMZ: 4.3, BMZ:	4.1, B:	4, Cu:	2, Mn:	3.3, Zn:	2.3	} },
+                 { crop: 'Sugarbeet',  ratio: {	BCMZ: 2.7, BMZ:	3, B: 	3, Cu:	1.3, Mn:	1.7, Zn:	2.1	} },
+                 { crop: 'Sugarcane',  ratio: {	BCMZ: 13, BMZ:	14, B: 	14, Cu:	6, Mn:	8, Zn:	9	} },
+                 { crop: 'Tomato', ratio: {	BCMZ: 13, BMZ:	14, B:	14, Cu:	6, Mn:	8, Zn: 10	} },
+                 { crop: 'Wheat', ratio: {	BCMZ: 3.2, BMZ:	4, B: 	3.5, Cu:	2.3, Mn:	2.6, Zn: 2.7	} }]
+crop_procotes.each do |data|
+  crop_name = data[:crop]
+  ratios = data[:ratio]
+  crop = Crop.find_by(name: crop_name)
+  ratios.each_key do |ratio_key|
+    puts "=> Adding crop: #{crop_name} -> #{ratio_key}"
+    procote = Procote.find_by(name: ratio_key)
+    crop.crop_procotes.create!(procote: procote, ratio: ratios[ratio_key])
+  end
+end
+
+puts '====================Crops Procode Ratio added================'
