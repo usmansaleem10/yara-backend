@@ -81,3 +81,25 @@ crop_procotes.each do |data|
 end
 
 puts '====================Crops Procode Ratio added================'
+
+puts '====================Crops Removal Ratio================'
+crop_removals = [
+  { crop: 'Alfalfa', ratios: { b_ratio:	9.07, cu_ratio:	9.07, mn_ratio:	49.90, zn_ratio:	49.90 } },
+  { crop: 'Barley', ratios: { b_ratio:	0.67, cu_ratio:	0.34, mn_ratio:	0.48, zn_ratio:	0.86 } },
+  { crop: 'Canola', ratios: { b_ratio:	1.08, cu_ratio:	0.12, mn_ratio:	0.96, zn_ratio:	1.31 } },
+  { crop: 'Corn', ratios: { b_ratio:	0.15, cu_ratio:	0.06, mn_ratio:	0.12, zn_ratio:	0.96 } },
+  { crop: 'Flax', ratios: { b_ratio:	0.76, cu_ratio:	0.25, mn_ratio:	0.63, zn_ratio:	2.40 } },
+  { crop: 'Oats', ratios: { b_ratio:	0.54, cu_ratio:	0.09, mn_ratio:	0.32, zn_ratio:	0.68 } },
+  { crop: 'Field Peas', ratios: { b_ratio:	0.48, cu_ratio:	0.14, mn_ratio:	0.28, zn_ratio:	1.24 } },
+  { crop: 'Potato', ratios: { b_ratio:	0.14, cu_ratio:	0.13, mn_ratio:	0.10, zn_ratio:	0.36 } },
+  { crop: 'Soybean', ratios: { b_ratio:	0.79, cu_ratio:	0.30, mn_ratio:	0.69, zn_ratio:	1.18 } },
+  { crop: 'Wheat', ratios: { b_ratio:	0.48, cu_ratio:	0.15, mn_ratio:	1.08, zn_ratio:	1.55 } }
+]
+crop_removals.each do |removal|
+  crop_name = removal[:crop]
+  ratios = removal[:ratios]
+  crop = Crop.find_by(name: crop_name)
+  crop.removals.create!(ratios)
+end
+
+puts '====================Crops Removal Ratio Added================'

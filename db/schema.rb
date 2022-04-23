@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_220_423_090_130) do
+ActiveRecord::Schema.define(version: 20_220_423_094_549) do
   create_table 'crop_procotes', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
     t.bigint 'crop_id', null: false
     t.bigint 'procote_id', null: false
@@ -45,6 +45,18 @@ ActiveRecord::Schema.define(version: 20_220_423_090_130) do
     t.index ['name'], name: 'index_procotes_on_name'
   end
 
+  create_table 'removals', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
+    t.bigint 'crop_id', null: false
+    t.float 'b_ratio', null: false
+    t.float 'cu_ratio', null: false
+    t.float 'mn_ratio', null: false
+    t.float 'zn_ratio', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['crop_id'], name: 'index_removals_on_crop_id'
+  end
+
   add_foreign_key 'crop_procotes', 'crops'
   add_foreign_key 'crop_procotes', 'procotes'
+  add_foreign_key 'removals', 'crops'
 end

@@ -5,6 +5,7 @@ class Crop < ApplicationRecord
 
   has_many :crop_procotes
   has_many :procotes, through: :crop_procotes
+  has_many :removals
 
   validates :name, presence: true
   validates :unit, inclusion: { in: UNITS,
