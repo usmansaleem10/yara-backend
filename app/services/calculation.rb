@@ -6,9 +6,9 @@ class Calculation
   def initialize(crop:, yield_value:, df_rate:, procote:)
     @params = {
       crop: crop,
-      yield_value: yield_value,
-      df_rate: df_rate,
-      procote: procote
+      yield_value: yield_value.to_f,
+      df_rate: df_rate.to_f,
+      procote: procote.to_sym
     }
     @crop = Crop.find_by(name: @params[:crop])
     @procote = Procote.find_by(name: @params[:procote])
