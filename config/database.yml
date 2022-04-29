@@ -82,10 +82,10 @@ staging:
   <<: *default
   database: yara_backend_staging
   username: yara_backend
-  password: <%= ENV['ZALOOS_COM_DATABASE_PASSWORD'] %>
+  password:
 
 production:
   <<: *default
   database: yara_backend_production
   username: yara_backend
-  password: <%= ENV['ZALOOS_COM_DATABASE_PASSWORD'] %>
+  password:
