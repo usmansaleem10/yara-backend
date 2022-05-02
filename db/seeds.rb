@@ -76,7 +76,7 @@ crop_procotes.each do |data|
   ratios.each_key do |ratio_key|
     puts "=> Adding crop: #{crop_name} -> #{ratio_key}"
     procote = Procote.find_by(name: ratio_key)
-    crop.crop_procotes.create!(procote: procote, ratio: ratios[ratio_key])
+    crop.crop_procotes.find_or_create_by(procote: procote, ratio: ratios[ratio_key])
   end
 end
 
@@ -99,7 +99,22 @@ crop_removals.each do |removal|
   crop_name = removal[:crop]
   ratios = removal[:ratios]
   crop = Crop.find_by(name: crop_name)
-  crop.removals.create!(ratios)
+  crop.removals.find_or_create_by(ratios)
 end
 
 puts '====================Crops Removal Ratio Added================'
+puts '====================Adding regions================'
+regions = { "ECAN": { states: ['New Brunswick', 'Newfoundland', 'Labrador', 'Nova Scotia', 'Ontario', 'Prince Edward Island', 'Quebec'],
+                      currency: 'east_canadian_price' },
+            "WCAN": { states: ['Alberta', 'British Columbia', 'Manitoba', 'Saskatchewan'],
+                      currency: 'west_canadian_price' },
+            "US": { states: ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyomin'],
+                    currency: 'us_price' } }
+regions.each do |region_name, details|
+  details[:states].each do |state|
+    region = Region.find_or_create_by(region_name: region_name, state_name: state)
+    region.currency = details[:currency]
+    region.save
+  end
+end
+puts '====================Regions Added================'

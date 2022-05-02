@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_23_094549) do
+ActiveRecord::Schema.define(version: 2022_05_02_103310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(version: 2022_04_23_094549) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_procotes_on_name"
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string "state_name", null: false
+    t.string "region_name", null: false
+    t.string "currency", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "removals", force: :cascade do |t|
