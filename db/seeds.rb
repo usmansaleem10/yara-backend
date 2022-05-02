@@ -2,13 +2,16 @@
 
 puts '====================Adding Procotes================'
 # Procotes
-procotes = [{ name: 'B', density: 1.415, canadian_price:	18.00, us_price:	68.00,	b_ratio: 0.1	},
-            { name: 'Cu', density: 1.524, canadian_price:	45.00, us_price:	138.00,	cu_ratio: 0.5	},
-            { name: 'Mn', density: 1.726, canadian_price:	24.00, us_price:	106.00,	mn_ratio: 0.5	},
-            { name: 'Zn', density: 1.643, canadian_price:	26.00, us_price:	100.00,	zn_ratio: 0.7 },
-            { name: 'BMZ', density: 1.580, canadian_price: 113.44, us_price: 90.00,	b_ratio: 0.06,		mn_ratio: 0.1,
+procotes = [{ name: 'B', density: 1.415, west_canadian_price: 26.00, east_canadian_price:	24.00, us_price:	91.00,	b_ratio: 0.1	},
+            { name: 'Cu', density: 1.524, west_canadian_price: 61.00, east_canadian_price:	70.00, us_price:	190.00,
+              cu_ratio: 0.5	},
+            { name: 'Mn', density: 1.726, west_canadian_price: 33.00, east_canadian_price:	40.00, us_price:	150.00,
+              mn_ratio: 0.5	},
+            { name: 'Zn', density: 1.643, west_canadian_price: 36.00, east_canadian_price:	42.00, us_price:	138.00,
+              zn_ratio: 0.7 },
+            { name: 'BMZ', density: 1.580, west_canadian_price: 0.00, east_canadian_price: 38.00, us_price: 112.00,	b_ratio: 0.06,	mn_ratio: 0.1,
               zn_ratio:	0.2 },
-            { name: 'BCMZ', density: 1.668, canadian_price:	28.00, us_price: 110.00,	b_ratio: 0.06, cu_ratio:	0.1,
+            { name: 'BCMZ', density: 1.668, west_canadian_price: 38.00, east_canadian_price:	46.00, us_price: 160.00,	b_ratio: 0.06, cu_ratio:	0.1,
               mn_ratio:	0.1, zn_ratio:	0.2 }]
 
 procotes.each do |procote|
