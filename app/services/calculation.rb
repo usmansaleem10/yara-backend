@@ -3,12 +3,13 @@
 class Calculation
   LBS_PER_METRIC_TON = 2204.62
   ROUND_PRECISION = 2
-  def initialize(crop:, yield_value:, df_rate:, procote:)
+  def initialize(crop:, yield_value:, df_rate:, procote:, preferences:)
     @params = {
       crop: crop,
       yield_value: yield_value.to_f,
       df_rate: df_rate.to_f,
-      procote: procote.to_sym
+      procote: procote.to_sym,
+      preferences: preferences
     }
     @crop = Crop.find_by(name: @params[:crop])
     @procote = Procote.find_by(name: @params[:procote])
@@ -33,7 +34,9 @@ class Calculation
   end
 
   def product_price(l_tonne)
-    (l_tonne * @procote.canadian_price / LBS_PER_METRIC_TON * @params[:df_rate]).round(ROUND_PRECISION)
+    region = Region.find_by(state_name: @params[:preferences][:state])
+    amount = region ? @procote[region.currency] : 0
+    (l_tonne * amount / LBS_PER_METRIC_TON * @params[:df_rate]).round(ROUND_PRECISION)
   end
 
   def crop_removal(procote_multiplier)
