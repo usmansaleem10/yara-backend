@@ -9,5 +9,5 @@ class Crop < ApplicationRecord
 
   validates :name, presence: true
   validates :unit, inclusion: { in: UNITS,
-                                message: '%{value} is not a valid unit' }
+                                message: '%<value>s is not a valid unit' }
 end

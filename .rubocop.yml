@@ -1,0 +1,7 @@
+AllCops:
+  NewCops: enable
+  Excludes:
+    - db/**/*
+
+Style/Documentation:
+  Enabled: false

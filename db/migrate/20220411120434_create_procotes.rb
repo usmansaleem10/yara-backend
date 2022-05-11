@@ -11,7 +11,6 @@ class CreateProcotes < ActiveRecord::Migration[6.1]
       t.float :cu_ratio, precision: 4, scale: 3
       t.float :mn_ratio, precision: 4, scale: 3
       t.float :zn_ratio, precision: 4, scale: 3
-
       t.timestamps
     end
   end

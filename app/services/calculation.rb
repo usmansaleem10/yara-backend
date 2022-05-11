@@ -13,9 +13,11 @@ class Calculation
     }
     @crop = Crop.find_by(name: @params[:crop])
     @procote = Procote.find_by(name: @params[:procote])
+    @region = Region.find_by(state_name: @params[:preferences][:state])
   end
 
   def call
+    # TODO: Validate crop, Region and procote
     procote_multiplier = @crop.crop_procotes.find_by(procote_id: @procote&.id)&.ratio
     l_tonne = litters_per_tonne(procote_multiplier)
     kg_tonne = @procote.density * l_tonne
@@ -34,8 +36,7 @@ class Calculation
   end
 
   def product_price(l_tonne)
-    region = Region.find_by(state_name: @params[:preferences][:state])
-    amount = region ? @procote[region.currency] : 0
+    amount = @procote[region.currency]
     (l_tonne * amount / LBS_PER_METRIC_TON * @params[:df_rate]).round(ROUND_PRECISION)
   end
 
@@ -44,8 +45,9 @@ class Calculation
     valid_ratios = procote_ratios.select { |_k, v| v.present? }
     ratio_hash = {}
     valid_ratios.each_key do |key|
-      ratio_hash[key] =
-        (@params[:yield_value] * procote_multiplier / procote_ratios[key] / @params[:yield_value] * removal_ratios[key]).round(ROUND_PRECISION)
+      value =
+        (@params[:yield_value] * procote_multiplier / procote_ratios[key] / @params[:yield_value] * removal_ratios[key])
+      ratio_hash[key] = value.round(ROUND_PRECISION)
     end
     ratio_hash
   end
