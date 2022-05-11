@@ -16,8 +16,8 @@ class Calculation
     @region = Region.find_by(state_name: @params[:preferences][:state])
   end
 
+  # TODO: Validate crop, Region and procote
   def call
-    # TODO: Validate crop, Region and procote
     procote_multiplier = @crop.crop_procotes.find_by(procote_id: @procote&.id)&.ratio
     l_tonne = litters_per_tonne(procote_multiplier)
     kg_tonne = @procote.density * l_tonne
@@ -25,8 +25,16 @@ class Calculation
     removal = crop_removal(procote_multiplier)
     {
       quantity_per_tonne: { liter: l_tonne, kg: kg_tonne },
-      price: price,
-      removal: removal
+      price: price, removal: removal, details: details
+    }
+  end
+
+  def details
+    {
+      crop: @crop,
+      procote: @procote,
+      region: @region,
+      removal: @crop.removals.first
     }
   end
 
@@ -36,7 +44,7 @@ class Calculation
   end
 
   def product_price(l_tonne)
-    amount = @procote[region.currency]
+    amount = @procote[@region.currency]
     (l_tonne * amount / LBS_PER_METRIC_TON * @params[:df_rate]).round(ROUND_PRECISION)
   end
 
