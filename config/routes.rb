@@ -2,4 +2,5 @@
 
 Rails.application.routes.draw do
   post '/calculate', to: 'calculator#calculate'
+  resources :crops, only: %i[index]
 end
