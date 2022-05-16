@@ -8,6 +8,7 @@ ruby '3.0.0'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'pg'
 gem 'puma', '~> 5.0'
+gem 'rack-cors'
 gem 'rails', '~> 6.1.5'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
