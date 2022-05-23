@@ -18,7 +18,7 @@ class Calculation
 
   # TODO: Validate crop, Region and procote
   def call
-    procote_multiplier = @crop.crop_procotes.find_by(procote_id: @procote&.id)&.ratio
+    @procote_multiplier = @crop.crop_procotes.find_by(procote_id: @procote&.id)&.ratio
     l_tonne = litters_per_tonne(procote_multiplier)
     kg_tonne = @procote.density * l_tonne
     price = product_price(l_tonne)
@@ -34,7 +34,8 @@ class Calculation
       crop: @crop,
       procote: @procote,
       region: @region,
-      removal: @crop.removals.first
+      removal: @crop.removals.first,
+      procote_multiplier: @procote_multiplier
     }
   end
 
