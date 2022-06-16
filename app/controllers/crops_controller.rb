@@ -11,7 +11,7 @@ class CropsController < ApplicationController
     @crop.removal.assign_attributes(permit_params[:removal])
     update_crop_procotes
     @crop.save
-    render json: CropSerializer.new(@crop).serialized_json
+    render_response @crop
   end
 
   private
