@@ -7,10 +7,11 @@ class CropsController < ApplicationController
   end
 
   def update
-    @crop.assign_attributes(crop_permit_params)
-    @crop.removal.assign_attributes(removal_permit_params)
+    @crop.assign_attributes(name: permit_params[:name], unit: permit_params[:unit])
+    @crop.removal.assign_attributes(permit_params[:removal])
+    update_crop_procotes
     @crop.save
-    render json: @crop.to_json(include: :removal)
+    render json: CropSerializer.new(@crop).serialized_json
   end
 
   private
@@ -19,11 +20,18 @@ class CropsController < ApplicationController
     @crop = Crop.includes(:removal).find(params[:id])
   end
 
-  def crop_permit_params
-    params.require(:crop).permit(%i[name unit])
+  def update_crop_procotes
+    crop_procotes = @crop.crop_procotes
+    crop_procotes.each do |crop_procote|
+      param_procote = permit_params[:procotes].select { |procote| procote[:procote_id] == crop_procote.procote_id }
+      next if param_procote.blank?
+
+      crop_procote.assign_attributes(ratio: param_procote.first[:ratio])
+    end
   end
 
-  def removal_permit_params
-    params.require(:removal).permit(%i[b_ratio cu_ratio mn_ratio zn_ratio])
+  def permit_params
+    params.require(:crop).permit(:name, :unit, removal: %i[b_ratio cu_ratio mn_ratio zn_ratio],
+                                               procotes: %i[procote_id ratio])
   end
 end
