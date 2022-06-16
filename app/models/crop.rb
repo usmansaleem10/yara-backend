@@ -5,9 +5,10 @@ class Crop < ApplicationRecord
 
   has_many :crop_procotes
   has_many :procotes, through: :crop_procotes
-  has_many :removals
+  has_one :removal
 
   validates :name, presence: true
   validates :unit, inclusion: { in: UNITS,
                                 message: '%<value>s is not a valid unit' }
+  accepts_nested_attributes_for :removal
 end
