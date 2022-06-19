@@ -3,7 +3,7 @@
 class ProcotesController < ApplicationController
   before_action :find_procote, only: %i[update]
   def index
-    render json: Procote.all
+    render_response(Procote.all, ProcoteSerializer)
   end
 
   def update

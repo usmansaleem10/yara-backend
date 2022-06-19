@@ -3,7 +3,7 @@
 class CropsController < ApplicationController
   before_action :find_crop, only: %i[update]
   def index
-    render json: Crop.all.select(:id, :name, :unit)
+    render_response(Crop.all, CropSerializer)
   end
 
   def update
