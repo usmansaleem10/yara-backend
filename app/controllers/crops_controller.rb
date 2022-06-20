@@ -23,15 +23,15 @@ class CropsController < ApplicationController
   def update_crop_procotes
     crop_procotes = @crop.crop_procotes
     crop_procotes.each do |crop_procote|
-      param_procote = permit_params[:procotes].select { |procote| procote[:procote_id] == crop_procote.procote_id }
+      param_procote = permit_params[:crop_procotes].select { |procote| procote[:procote_id] == crop_procote.procote_id }
       next if param_procote.blank?
 
-      crop_procote.assign_attributes(ratio: param_procote.first[:ratio])
+      crop_procote.update(ratio: param_procote.first[:ratio])
     end
   end
 
   def permit_params
     params.require(:crop).permit(:name, :unit, removal: %i[b_ratio cu_ratio mn_ratio zn_ratio],
-                                               procotes: %i[procote_id ratio])
+                                               crop_procotes: %i[procote_id ratio])
   end
 end
