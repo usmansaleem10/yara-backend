@@ -34,7 +34,7 @@ class Calculation
       crop: @crop,
       procote: @procote,
       region: @region,
-      removal: @crop.removals.first,
+      removal: @crop.removal,
       procote_multiplier: @procote_multiplier
     }
   end
@@ -65,7 +65,7 @@ class Calculation
     procote_ratios = {
       b_ratio: @procote.b_ratio, cu_ratio: @procote.cu_ratio, mn_ratio: @procote.mn_ratio, zn_ratio: @procote.zn_ratio
     }
-    removal = @crop.removals.first
+    removal = @crop.removal
     removal_ratios = {
       b_ratio: removal.b_ratio, cu_ratio: removal.cu_ratio, mn_ratio: removal.mn_ratio, zn_ratio: removal.zn_ratio
     }
