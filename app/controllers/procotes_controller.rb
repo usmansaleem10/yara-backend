@@ -20,6 +20,6 @@ class ProcotesController < ApplicationController
 
   def permit_params
     params.require(:procote).permit(%i[name density us_price b_ratio cu_ratio mn_ratio zn_ratio east_canadian_price
-                                       west_canadian_price])
+                                       west_canadian_price url])
   end
 end
