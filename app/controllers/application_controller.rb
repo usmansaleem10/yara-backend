@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-
   private
 
   def render_response(object, serializer_klass = nil)

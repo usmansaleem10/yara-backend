@@ -54,6 +54,8 @@ class Calculation
     valid_ratios = procote_ratios.select { |_k, v| v.present? }
     ratio_hash = {}
     valid_ratios.each_key do |key|
+      next if removal_ratios[key].nil?
+
       value =
         (@params[:yield_value] * procote_multiplier / procote_ratios[key] / @params[:yield_value] * removal_ratios[key])
       ratio_hash[key] = value.round(ROUND_PRECISION)
@@ -66,9 +68,12 @@ class Calculation
       b_ratio: @procote.b_ratio, cu_ratio: @procote.cu_ratio, mn_ratio: @procote.mn_ratio, zn_ratio: @procote.zn_ratio
     }
     removal = @crop.removal
-    removal_ratios = {
-      b_ratio: removal.b_ratio, cu_ratio: removal.cu_ratio, mn_ratio: removal.mn_ratio, zn_ratio: removal.zn_ratio
-    }
+    removal_ratios = {}
+    if removal.present?
+      removal_ratios = {
+        b_ratio: removal.b_ratio, cu_ratio: removal.cu_ratio, mn_ratio: removal.mn_ratio, zn_ratio: removal.zn_ratio
+      }
+    end
     [procote_ratios, removal_ratios]
   end
 end
