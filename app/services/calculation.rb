@@ -35,13 +35,14 @@ class Calculation
       procote: @procote,
       region: @region,
       removal: @crop.removal,
-      procote_multiplier: @procote_multiplier
+      procote_multiplier: @procote_multiplier,
+      ml_procote_per_acre: @ml_procote_per_acre
     }
   end
 
   def litters_per_tonne(procote_multiplier)
-    ml_procote_per_acre = @params[:yield_value] * procote_multiplier
-    (LBS_PER_METRIC_TON / @params[:df_rate] * ml_procote_per_acre / 1000).round(ROUND_PRECISION)
+    @ml_procote_per_acre = @params[:yield_value] * procote_multiplier
+    (LBS_PER_METRIC_TON / @params[:df_rate] * @ml_procote_per_acre / 1000).round(ROUND_PRECISION)
   end
 
   def product_price(l_tonne)
@@ -55,10 +56,9 @@ class Calculation
     ratio_hash = {}
     valid_ratios.each_key do |key|
       next if removal_ratios[key].nil?
-
       value =
-        (@params[:yield_value] * procote_multiplier / procote_ratios[key] / @params[:yield_value] * removal_ratios[key])
-      ratio_hash[key] = value.round(ROUND_PRECISION)
+        (@params[:yield_value] * procote_multiplier * procote_ratios[key])/(@params[:yield_value] * removal_ratios[key]) 
+      ratio_hash[key] = value.round(ROUND_PRECISION)*100
     end
     ratio_hash
   end
