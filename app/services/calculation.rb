@@ -47,6 +47,8 @@ class Calculation
 
   def product_price(l_tonne)
     amount = @procote[@region.currency]
+    return ((@ml_procote_per_acre / 29.574) * amount) / 128 if @region.currency == 'us_price'
+
     (l_tonne * amount / LBS_PER_METRIC_TON * @params[:df_rate]).round(ROUND_PRECISION)
   end
 
@@ -56,9 +58,10 @@ class Calculation
     ratio_hash = {}
     valid_ratios.each_key do |key|
       next if removal_ratios[key].nil?
+
       value =
-        (@params[:yield_value] * procote_multiplier * procote_ratios[key])/(@params[:yield_value] * removal_ratios[key]) 
-      ratio_hash[key] = value.round(ROUND_PRECISION)*100
+        (@params[:yield_value] * procote_multiplier * procote_ratios[key]) / (@params[:yield_value] * removal_ratios[key])
+      ratio_hash[key] = value.round(ROUND_PRECISION) * 100
     end
     ratio_hash
   end
