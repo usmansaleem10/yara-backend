@@ -6,21 +6,21 @@ ruby-3.0.0
 * Staging Configuration
 Set the following environemnt variables for Staging
 - RAILS_ENV=staging
-- STAGING_DATABASE_NAME
+- DB_NAME
   as per system(yara) requirement
-- STAGING_DATABASE_USER_NAME
+- DB_USER_NAME
   as per system(yara) requirement
-- STAGING_DATABASE_PASSWORD
+- DB_PASSWORD
   as per system(yara) requirement
 
 * Prod Configuration
 Set the following environemnt variables for Production
 - RAILS_ENV=production
-- PROD_DATABASE_NAME
+- DB_NAME
   as per system(yara) requirement
-- PROD_DATABASE_USER_NAME
+- DB_USER_NAME
   as per system(yara) requirement
-- PROD_DATABASE_PASSWORD
+- DB_PASSWORD
   as per system(yara) requirement
 
 * Database creation
