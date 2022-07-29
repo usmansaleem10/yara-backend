@@ -104,7 +104,7 @@ crop_removals.each do |removal|
   crop_name = removal[:crop]
   ratios = removal[:ratios]
   crop = Crop.find_by(name: crop_name)
-  crop.removals.find_or_create_by(ratios)
+  crop.create_removal(ratios)
 end
 
 puts '====================Crops Removal Ratio Added================'
